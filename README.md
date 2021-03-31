@@ -32,11 +32,14 @@ Which will return you array of some awesome assets, like below:
 ```json
 [
   {
-    "id": "606444275bce6870c6d33809",
+    "id": "60645015ddc3cd2f2b687f0c",
     "image": "https://source.unsplash.com/random/400x600",
-    "type": "MOVIE",
+    "type": "LIVECHANNEL",
+    "url": "https://multiplatform-f.aka.../master.m3u8",
+    "plot": "Voluptate ..",
     "canRemove": true,
-    "removeMessage": "incididunt est id pariatur"
+    "removeMessage": "labore nisi minim magna",
+    "progress": 0
   }
   ..
 ]
