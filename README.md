@@ -58,7 +58,7 @@ Now let's go ahead to our UI and I'll show you the main flow. Please read carefu
 9. If content group after deletion remains empty - please remove it also.
 10. User can rotate phone and watch asset in fullscreen mode. Also user can use fullscreen button and play pause buttons.
 
-That's all flow. 
+That's all flow. Please, no storyboards, xib files, localizations, CoreData. I recommend using pods - Alamofire for networking and Kingfisher for image load and cache.
 
 Additional flow, not required, but will be a plus:
 1. When video reaches end, start playing next video from current content group
