@@ -65,7 +65,7 @@ That's all flow. Please, no storyboards, xib files, localizations, CoreData. I r
 
 Additional flow, not required, but will be a plus:
 1. When video reaches end, start playing next video from current content group
-2. Content groups must have infinite scrolling, some way of pagination (load endpoint of content group one more time with params `&limit=10&offset=10`)
+2. Content groups must have infinite scrolling, some way of pagination (load endpoint of content group one more time with params `https://next.json-generator.com/api/json/get/VkHeTQ6Vq?groupId=60643c0673cd2113bb65de36&limit=10&offset=10`)
 
 
 We will accept solutions in pull requests to this repository.
