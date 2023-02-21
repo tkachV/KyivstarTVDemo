@@ -5,7 +5,7 @@ This test briefly touches on key aspects of working in our `iOS` team, so try yo
 
 You need to do this layout:
 
-<img src="https://i.imgur.com/G4DAPSk.png" width="550" height="400">
+<img src="https://i.imgur.com/G4DAPSk.png" width="650" height="450">
 https://www.figma.com/file/9RIx2wI8xY1edWmch1K9x1/Untitled?node-id=0%3A1&t=iB6LMzByfLlwsM0v-1
 
 It contains content groups with assets and asset page with some simple logic. 
@@ -13,11 +13,14 @@ You can do only required screen, or required and optional screens.
 You must use:
 1. MVVM
 2. Combine for binding
+3. ios <= 13.4
 
 Any other technics and mechanics - on your choice.
 
 ### API Details
 Network setup is attached inside postman collection. Feel free to import it.
+
+Bearer Token: u0xj6pw0fdf7m2l1dvcic7uolk45e79itgin54l8
 
 All necessary requests and headers with tokens are stored there. 
 
@@ -37,10 +40,12 @@ Basic flow:
 4. User can see progress bar under asset image, if `progress > 0`
 5. User can tap `Del` button - which will remove content group from screen if `canBeDeleted` flag of contentGroup is set to true
 
-Please, no storyboards, xib files, localizations, CoreData. I recommend using pods - Alamofire for networking and Kingfisher for image load and cache.
-
 Additional flow, not required, but will be a plus:
 1. User can tap on any asset and open asset details page
+
+Please, no storyboards, xib files, localizations, CoreData. 
+I recommend using SPM's - Alamofire for networking, Kingfisher for image load and cache, SnapKit for AutoLayout.
+
 
 We will accept solutions in pull requests to this repository.
 The best solution will be pushed into main repository - so everyone can know something new for himself.

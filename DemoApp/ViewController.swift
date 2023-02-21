@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     private func setupViews() {
         
-        helloLabel.text = "Welcome to vidmind !"
+        helloLabel.text = "Welcome to KyivstarTV test app!"
         view.addSubview(helloLabel)
    
     }
