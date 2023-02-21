@@ -11,6 +11,7 @@ https://www.figma.com/file/9RIx2wI8xY1edWmch1K9x1/Untitled?node-id=0%3A1&t=iB6LM
 It contains content groups with assets and asset page with some simple logic. 
 You can do only required screen, or required and optional screens.
 You must use:
+0. UIKit
 1. MVVM
 2. Combine for binding
 3. ios <= 13.4
@@ -42,6 +43,8 @@ Basic flow:
 
 Additional flow, not required, but will be a plus:
 1. User can tap on any asset and open asset details page
+2. Make network call to load asset details
+3. Pay attention on UI in figma, how it have to work
 
 Please, no storyboards, xib files, localizations, CoreData. 
 I recommend using SPM's - Alamofire for networking, Kingfisher for image load and cache, SnapKit for AutoLayout.
