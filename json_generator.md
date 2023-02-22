@@ -1,3 +1,6 @@
+This is system file with json instructions to generate json's at online source - http://json-generator.com/ .
+Ignore this file.
+
 Content Groups
 JG.repeat(10, 15, {
   id: JG.objectId(),
