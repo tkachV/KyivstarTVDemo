@@ -11,10 +11,12 @@ https://www.figma.com/file/9RIx2wI8xY1edWmch1K9x1/Untitled?node-id=0%3A1&t=iB6LM
 It contains content groups with assets and asset page with some simple logic. 
 You can do only required screen, or required and optional screens.
 You must use:
+
 0. UIKit
 1. MVVM
 2. Combine for binding
-3. ios <= 13.4
+3. Diffable Data Source and Compositional Layout
+4. ios <= 13.4
 
 Any other technics and mechanics - on your choice.
 
