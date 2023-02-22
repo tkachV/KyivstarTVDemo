@@ -5,12 +5,24 @@ This test briefly touches on key aspects of working in our `iOS` team, so try yo
 
 You need to do this layout:
 
-<img src="https://i.imgur.com/G4DAPSk.png" width="650" height="450">
+<img src="https://i.imgur.com/2KewJw9.png" width="650" height="450">
 https://www.figma.com/file/9RIx2wI8xY1edWmch1K9x1/Untitled?node-id=0%3A1&t=iB6LMzByfLlwsM0v-1
 
 It contains content groups with assets and asset page with some simple logic. 
-You can do only required screen, or required and optional screens.
-You must use:
+
+#### Required:
+1. Home screen
+2. Transition (pushViewController) from home screen to asset details screen (UIViewController)
+3. Simple Asset Details screen with image, buttons and title
+
+#### Optional:
+1. Asset details screen according to figma design, marked as optional
+
+
+You can do only required section, or required and optional sections.
+
+
+#### You must use:
 
 0. UIKit
 1. MVVM
