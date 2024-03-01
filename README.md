@@ -64,7 +64,7 @@ Additional flow, not required, but will be a plus:
 Please, no storyboards, xib files, localizations.
 
 
-We will accept solutions in pull requests to this repository.
+It will be a plus to create pull request into this repository.
 The best solution will be pushed into main repository - so everyone can know something new for himself.
 
 GL HF.
