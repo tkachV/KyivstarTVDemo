@@ -24,13 +24,14 @@ You can do only required section, or required and optional sections.
 
 #### You must use:
 
-0. UIKit
-1. MVVM
+0. UIKit + SwiftUI
+1. MVVM+C
 2. Combine for binding
 3. Diffable Data Source and Compositional Layout
-4. ios <= 13.4
+4. ios >= 14.0
 
 Any other technics and mechanics - on your choice.
+Would be a plus if you will use modern concurency methods.
 
 ### API Details
 Network setup is attached inside postman collection. Feel free to import it.
