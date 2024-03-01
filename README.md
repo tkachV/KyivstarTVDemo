@@ -40,13 +40,13 @@ Bearer Token: `vf9y8r25pkqkemrk21dyjktqo7rs751apk4yjyrl`
 
 All necessary requests and headers with tokens are stored there. 
 
-When loading list of content groups please pay attention on content group type. 
+When loading list of content groups please pay attention on content group type. We need to show only this ones: 
 
 `
 MOVIE, SERIES, LIVECHANNEL, EPG
 `
 
-Depending on type - build layout (more details in figma)
+And depending on type - we need to build different layout (more details in figma)
 
 Basic flow:
 

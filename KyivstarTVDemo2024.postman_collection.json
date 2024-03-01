@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "e9376cb2-be88-4d73-aef9-fcb4ae94e87b",
+		"_postman_id": "890fa08f-0b47-44c3-86fd-698491777616",
 		"name": "KyivstarTV Demo",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4458119"
 	},
 	"item": [
 		{
