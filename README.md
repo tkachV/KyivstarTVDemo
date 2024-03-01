@@ -61,8 +61,7 @@ Additional flow, not required, but will be a plus:
 2. Make network call to load asset details
 3. Pay attention on UI in figma, how it have to work
 
-Please, no storyboards, xib files, localizations, CoreData. 
-I recommend using SPM's - Alamofire for networking, Kingfisher for image load and cache, SnapKit for AutoLayout.
+Please, no storyboards, xib files, localizations.
 
 
 We will accept solutions in pull requests to this repository.
