@@ -1,7 +1,7 @@
 # KyivstarTV Demo
 # Hello! 
 
-This test briefly touches on key aspects of working in our `iOS` team, so try your best ;) 
+This test briefly touches on key aspects of working in our iOS team, so try your best 😉 
 
 You need to do this layout:
 
@@ -12,7 +12,7 @@ It contains content groups with assets and asset page with some simple logic.
 
 #### Required:
 1. Home screen
-2. Transition from `UIKit` home screen to `SUI` asset details screen
+2. Transition from UIKit home screen to SUI asset details screen
 3. Simple Asset Details screen with image, buttons and title
 
 #### Optional:
@@ -36,7 +36,7 @@ Would be a plus if you will use modern concurency methods.
 ### API Details
 Network setup is attached inside postman collection. Feel free to import it.
 
-Bearer Token: `vf9y8r25pkqkemrk21dyjktqo7rs751apk4yjyrl`
+Bearer Token: vf9y8r25pkqkemrk21dyjktqo7rs751apk4yjyrl
 
 All necessary requests and headers with tokens are stored there. 
 
@@ -48,25 +48,27 @@ MOVIE, SERIES, LIVECHANNEL, EPG
 
 And depending on type - we need to build different layout (more details in figma)
 
-Basic flow:
+Basic required flow:
 
 1. User opens application.
-2. Network calls start to load information. You can make network calls `sync` or `async` - depends on you. [Optional]: You can create skeletons if you want.
+2. Network calls start to load information. [Optional]: You can create skeletons if you want - it's not required.
 3. When some of the data is loaded - user starts to see it on screen.
-4. User can see progress bar under asset image, if `progress > 0`
-5. User can tap `Del` button - which will remove content group from screen if `canBeDeleted` flag of contentGroup is set to true
+4. User can see progress bar under asset image, if progress > 0
+5. User can tap Del button - which will remove content group from screen if canBeDeleted flag of contentGroup is set to true
+6. User can tap on any asset and open SwiftUI asset details page with title, image and back button. 
 
-Additional flow, not required, but will be a plus:
-1. User can tap on any asset and open `SwiftUI` asset details page.
-2. Make network call to load asset details
+Additional flow, not required, but will be a plus - Asset Details Page:
+1. Make network call to load asset details
+2. Populate data from network call into UI
 3. Pay attention on UI in figma, how it have to work
 
-Please, no storyboards, xib files, localizations.
+No storyboards, xib files and localizations. 
+Use system default fonts, just take care of bold/regular weight. 
 
 
-It will be a plus to create pull request into this repository.
+You have to create a fork from this repository and then create pull request here.
 The best solution will be pushed into main repository - so everyone can know something new.
 
 GL HF.
 
-p.s. If you have any questions(maybe some endpoints stoped working, or flow is not clear), feel free to create issues inside this repository, we'll try to react quickly. 
+p.s. If you have any questions(maybe some endpoints stoped working, dead tokens, flow is not clear), feel free to create issues inside this repository, we'll try to react quickly.
