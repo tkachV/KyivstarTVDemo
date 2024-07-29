@@ -36,7 +36,7 @@ Would be a plus if you will use modern concurency methods.
 ### API Details
 Network setup is attached inside postman collection. Feel free to import it.
 
-Bearer Token: vf9y8r25pkqkemrk21dyjktqo7rs751apk4yjyrl
+Bearer Token: `b3kgsqs1kqytlpact6fhh6pd8grvdj7kqm0nkvd1`
 
 All necessary requests and headers with tokens are stored there. 
 
