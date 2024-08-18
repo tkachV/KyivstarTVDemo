@@ -11,7 +11,6 @@ import SkeletonView
 
 class HomeLogoHeaderView: UICollectionReusableView {
     static let reuseIdentifier = "HomeLogoHeaderView"
-    static let elementKind = "HomeLogoHeaderView"
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()

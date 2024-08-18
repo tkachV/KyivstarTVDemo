@@ -17,8 +17,6 @@ enum HomeSectionHeaderAction {
 
 final class HomeSectionHeaderView: UICollectionReusableView {
     static let reuseIdentifier = "SectionHeaderView"
-    static let elementKind = "SectionHeaderView"
-
     
     var sectionModel: SectionModel?
     let viewOutputSubject = PassthroughSubject<HomeSectionHeaderAction, Never>()

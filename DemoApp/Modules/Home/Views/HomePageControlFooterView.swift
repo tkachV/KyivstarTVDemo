@@ -11,7 +11,6 @@ import Combine
 
 class HomePageControlFooterView: UICollectionReusableView {
     static let reuseIdentifier = "HomePageControlFooterView"
-    static let elementKind = "HomePageControlFooterView"
 
     private let pageControl: UIPageControl = {
         let pageControl = UIPageControl()

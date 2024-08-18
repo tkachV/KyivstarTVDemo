@@ -22,15 +22,6 @@ final class HomeLiveChannelCell: UICollectionViewCell {
         return imageView
     }()
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textColor = .titleText
-        return label
-    }()
-    
     let lockedImageView: UIImageView = {
         let lockView = UIImageView(image: UIImage(named: "home.video_locked"))
         lockView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +47,6 @@ final class HomeLiveChannelCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        titleLabel.text = nil
         imageView.image = nil
         lockedImageView.isHidden = true
     }
@@ -65,11 +55,9 @@ final class HomeLiveChannelCell: UICollectionViewCell {
     private func setupViews() {
         isSkeletonable = true
 //        imageView.isSkeletonable = true
-//        titleLabel.isSkeletonable = true
         
         imageView.layer.masksToBounds = true
         
-        contentView.addSubview(titleLabel)
         contentView.addSubview(imageView)
         contentView.addSubview(lockedImageView)
     }

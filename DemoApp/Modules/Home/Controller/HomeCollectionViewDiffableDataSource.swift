@@ -52,11 +52,11 @@ extension HomeCollectionViewDiffableDataSource: SkeletonCollectionViewDataSource
 
         switch (sectionType, supplementaryViewIdentifierOfKind) {
         case (.promotions, UICollectionView.elementKindSectionHeader):
-            return HomeLogoHeaderView.elementKind
+            return HomeLogoHeaderView.reuseIdentifier
         case (.promotions, UICollectionView.elementKindSectionFooter):
-            return HomePageControlFooterView.elementKind
+            return HomePageControlFooterView.reuseIdentifier
         case (_, UICollectionView.elementKindSectionHeader):
-            return HomeSectionHeaderView.elementKind
+            return HomeSectionHeaderView.reuseIdentifier
         default:
             return nil
         }
