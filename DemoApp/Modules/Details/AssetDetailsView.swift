@@ -36,7 +36,7 @@ struct AssetDetailsView: View {
     
     // MARK: - Body
     var body: some View {
-        ScrollView {
+        VStack {
             switch viewModel.state {
             case .loading:
                 ProgressView()
@@ -70,9 +70,10 @@ struct AssetDetailsContentView: View {
             buttonsSection()
             Divider()
                 .padding([.leading, .trailing])
-            
-            textSection()
-            similarSection()
+            ScrollView {
+                textSection()
+                similarSection()
+            }
         }
     }
 }
