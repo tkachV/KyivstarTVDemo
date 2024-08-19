@@ -152,54 +152,9 @@ extension AssetDetailsContentView {
                 .fontWeight(.bold)
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 104))]) {
                 ForEach(model.similar, id: \.self) { item in
-                    ZStack(alignment: .topLeading){
-                        WebImage(url: URL(string: item.image)) { image in
-                            image.resizable()
-                        } placeholder: {
-                            Rectangle()
-                                .foregroundColor(.gray)
-                        }
-                        .resizable()
-                        .scaledToFit()
-                        Group {
-                            if !item.purchased {
-                                Image.init(.homeVideoLocked)
-                                    .frame(width: 24.0, height: 24.0).offset(x: 8.0, y: 8.0)
-                            }
-                            if item.progress != 0 {
-                                ProgressView(value: Double(item.progress)/100.0)
-                                    .frame(height: 4.0).offset(y: 152.0)
-                            }
-                        }
-                    }.scaledToFit()
-                    .frame(height: 156.0)
-                    .cornerRadius(12.0)
+                    AssetDetailsSimilarItemView(item: item)
                 }
             }
         }.padding(EdgeInsets.init(top: 12.0, leading: 24.0, bottom: 12.0, trailing: 24.0))
     }
 }
-
-struct CustomButtonStyle: ButtonStyle {
-    
-    let backgroundColor: Color
-    let strokeColor: Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        ZStack {
-            let offset: CGFloat = 2
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(backgroundColor)
-                .offset(y: offset)
-            RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(backgroundColor)
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(strokeColor, lineWidth: 1))
-                .offset(y: configuration.isPressed ? offset : 0)
-            configuration.label
-                .offset(y: configuration.isPressed ? offset : 0)
-                .compositingGroup()
-                .shadow(radius: 6, y: 4)
-        }
-    }
-}
-

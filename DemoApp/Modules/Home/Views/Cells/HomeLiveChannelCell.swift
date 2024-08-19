@@ -18,7 +18,6 @@ final class HomeLiveChannelCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
-        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
@@ -26,6 +25,7 @@ final class HomeLiveChannelCell: UICollectionViewCell {
         let lockView = UIImageView(image: UIImage(named: "home.video_locked"))
         lockView.translatesAutoresizingMaskIntoConstraints = false
         lockView.contentMode = .scaleAspectFit
+        lockView.isHidden = true
         return lockView
     }()
     
@@ -49,6 +49,7 @@ final class HomeLiveChannelCell: UICollectionViewCell {
         super.prepareForReuse()
         imageView.image = nil
         lockedImageView.isHidden = true
+        imageView.backgroundColor = .clear
     }
     
     // MARK: - Setup
@@ -64,25 +65,26 @@ final class HomeLiveChannelCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            lockedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            lockedImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            lockedImageView.widthAnchor.constraint(equalToConstant: 32),
-            lockedImageView.heightAnchor.constraint(equalToConstant: 32),
-
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
+            
+            lockedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            lockedImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            lockedImageView.widthAnchor.constraint(equalToConstant: 32),
+            lockedImageView.heightAnchor.constraint(equalToConstant: 32),
         ])
     }
     
     // MARK: - Public configuration
     func configure(with model: ContentGroup.Asset) {
         guard let url = URL(string: model.image) else {
+            imageView.backgroundColor = .lightGray
             return
         }
-        imageView.sd_setImage(with: url)
-        
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
+
         lockedImageView.isHidden = model.purchased
     }
 }

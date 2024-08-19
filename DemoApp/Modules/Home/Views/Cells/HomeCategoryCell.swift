@@ -18,7 +18,6 @@ class HomeCategoryCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16.0
         imageView.layer.masksToBounds = true
-        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
@@ -27,7 +26,7 @@ class HomeCategoryCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)// in design Regula Bold ?
+        label.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)// in design Regular Bold ?
         label.textColor = .titleText
         return label
     }()
@@ -47,6 +46,7 @@ class HomeCategoryCell: UICollectionViewCell {
         super.prepareForReuse()
         titleLabel.text = nil
         imageView.image = nil
+        imageView.backgroundColor = .clear
     }
     
     // MARK: - Setup
@@ -75,9 +75,11 @@ class HomeCategoryCell: UICollectionViewCell {
     // MARK: - Public configuration
     func configure(with model: CategoriesResponse.Category) {
         guard let url = URL(string: model.image) else {
+            imageView.backgroundColor = .lightGray
             return
         }
-        imageView.sd_setImage(with: url)
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
+        
         titleLabel.text = model.name
     }
 }

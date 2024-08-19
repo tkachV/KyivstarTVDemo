@@ -18,7 +18,6 @@ final class HomeCollectionViewDiffableDataSource: UICollectionViewDiffableDataSo
     }
 }
 
-
 extension HomeCollectionViewDiffableDataSource: SkeletonCollectionViewDataSource {
     func numSections(in collectionSkeletonView: UICollectionView) -> Int {
         return Collection.Section.allCases.count

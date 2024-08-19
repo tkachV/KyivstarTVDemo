@@ -61,7 +61,7 @@ final class HomeViewController: UIViewController {
         bindViewModel()
         refreshControl.addTarget(self, action: #selector(refreshContentAction), for: .valueChanged)
 
-        viewModel.viewEventSubject.send(.viewDidLoad)
+        viewModel.viewEventsSubject.send(.viewDidLoad)
     }
     
     override func viewWillAppear(_ animated: Bool) {

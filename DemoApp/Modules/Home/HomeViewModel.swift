@@ -21,15 +21,17 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var viewStatus: CollectionStatus = .idl
     
     public let viewActionsSubject = PassthroughSubject<HomeViewAction, Never>()
-    public let viewEventSubject = PassthroughSubject<HomeViewEvent, Never>()
+    public let viewEventsSubject = PassthroughSubject<HomeViewEvent, Never>()
     private var cancellable = Set<AnyCancellable>()
 
+    //--
+    private let apiService: HomeAPIService
+ 
     // MARK: - Init
-    
-    init() {
+    init(apiService: HomeAPIService = HomeAPIServiceImpl()) {
+        self.apiService = apiService
         internalBinding()
     }
-    
     
     func groupItem(for indexPath: IndexPath) -> ContentGroup.Asset? {
         guard let collectionItem = sectionModels[safe: indexPath.section]?.items[safe: indexPath.row] else { return nil }
@@ -54,61 +56,49 @@ final class HomeViewModel: ObservableObject {
                 self.viewStatus = .loaded(self.sectionModels)
             case .refreshContent:
                 self.viewStatus = .refresh
-                Task {
-                    do {
-                        try await self.loadData()
-                    } catch {
-                        self.viewStatus = .error(error)
-                    }
-                }
+                self.runDataTask()
             }
         }.store(in: &cancellable)
         
-        viewEventSubject.sink { [weak self] event in
+        viewEventsSubject.sink { [weak self] event in
             guard let self = self else { return }
             switch event {
             case .viewDidLoad:
                 self.viewStatus = .loading
-                Task {
-                    do {
-                        try await self.loadData()
-                    } catch {
-                        self.viewStatus = .error(error)
-                    }
-                }
+                self.runDataTask()
             }
         }.store(in: &cancellable)
     }
     
-    // MARK: - Open
+    // MARK: - Private
+    private func runDataTask() {
+        Task {
+            do {
+                try await self.loadData()
+            } catch {
+                self.viewStatus = .error(error)
+            }
+        }
+    }
+    
     private func loadData() async throws {
         var sections: [SectionModel] = []
 
-        let promotions = try await loadPromotions()
-        
+        //async let
+        let (promotions, categories, contentGroups) = await (try loadPromotions(),
+                                                             try loadCategories(),
+                                                             try loadContentGroups())
         //Promotions
         let promotionItems = promotions.promotions.compactMap { SectionItem.promotion($0) }
         let promotionSection = SectionModel(section: .promotions, items: promotionItems)
         sections.append(promotionSection)
         
         promotionsViewModel.updatePromotions(promotionItems)
-        
-        //Update
-        sectionModels = sections
-        viewStatus = .loaded(sections)
-        
-        let categories = try await loadCategories()
-        
+
         //Categories
         let categoriesItems = categories.categories.compactMap { SectionItem.category($0)}
         let categoriesSection = SectionModel(section: .categories, items: categoriesItems)
         sections.append(categoriesSection)
-        
-        //Update
-        sectionModels = sections
-        viewStatus = .loaded(sections)
-        
-        let contentGroups = try await loadContentGroups()
 
         //Moview & Series
         let movieSeriesItems = contentGroups
@@ -127,7 +117,6 @@ final class HomeViewModel: ObservableObject {
             .compactMap { SectionItem.liveChannel($0) }
         let liveChannelsSection = SectionModel(section: .liveChannesGroup, items: liveChannelsItems)
         sections.append(liveChannelsSection)
-
         
         let epgItems = contentGroups
             .filter { $0.type.contains(.epg) }
@@ -144,14 +133,14 @@ final class HomeViewModel: ObservableObject {
     
     // MARK: - Working with loading data
     private func loadPromotions() async throws -> PromotionsResponse {
-        try await HomeAPI.getPromotions()
+        try await apiService.getPromotions()
     }
     
     private func loadCategories() async throws -> CategoriesResponse {
-        try await HomeAPI.getCategories()
+        try await apiService.getCategories()
     }
     
     private func loadContentGroups() async throws -> [ContentGroup] {
-        try await HomeAPI.getContentGroups()
+        try await apiService.getContentGroups()
     }
 }

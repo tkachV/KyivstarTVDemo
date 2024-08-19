@@ -13,7 +13,7 @@ final class AppCoordinator: Coordinator {
     private let serviceProvider: AppServiceProvider = AppServiceProviderImpl()
     
     let window: UIWindow!
-    var rootViewController: UIViewController?
+    var rootViewController: UINavigationController?
 
     var submodules: [Coordinator] = []
     

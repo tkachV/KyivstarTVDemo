@@ -18,7 +18,6 @@ final class HomePromotionCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16.0
         imageView.layer.masksToBounds = true
-        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
@@ -29,6 +28,7 @@ final class HomePromotionCell: UICollectionViewCell {
             UIColor.black.withAlphaComponent(0.5).cgColor
         ]
         layer.locations = [0.0, 1.0]
+        layer.isHidden = true
         return layer
     }()
     
@@ -47,6 +47,7 @@ final class HomePromotionCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+        imageView.backgroundColor = .clear
     }
     
     override func layoutSubviews() {
@@ -84,9 +85,11 @@ final class HomePromotionCell: UICollectionViewCell {
     // MARK: - Public configuration
     func configure(with model: PromotionsResponse.Promotion) {
         guard let url = URL(string: model.image) else {
+            imageView.backgroundColor = .lightGray
             return
         }
-        imageView.sd_setImage(with: url)
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
+        gradientLayer.isHidden = false
     }
 
 }

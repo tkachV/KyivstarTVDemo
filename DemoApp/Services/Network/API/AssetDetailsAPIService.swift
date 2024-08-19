@@ -7,9 +7,13 @@
 
 import Foundation
 
-final class AssetDetailsAPI: BaseAPI {
+protocol AssetDetailsAPIService {
+    func getAssetDetails(asset: ContentGroup.Asset) async throws -> AssetDetailsModel
+}
+
+final class AssetDetailsAPIServiceImpl: BaseAPI, AssetDetailsAPIService {
     
-    static func getAssetDetails(asset: ContentGroup.Asset) async throws -> AssetDetailsModel {
+    func getAssetDetails(asset: ContentGroup.Asset) async throws -> AssetDetailsModel {
         var request = GenericRequest(withMethod: .get, path: "templates/04Pl5AYhO6-n/data")
         //will be some specific id from asset model.
         request.authenticated = true

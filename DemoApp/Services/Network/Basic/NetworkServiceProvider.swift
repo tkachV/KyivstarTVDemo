@@ -15,10 +15,10 @@ enum NetworkServiceProviderError: Error {
 }
 
 protocol NetworkServiceProvider {
-    func get<T:Decodable>(_ url: URL) async throws -> T
+    func perform<T:Decodable>(_ request: GenericRequest) async throws -> T
 }
 
-final class NetworkServiceProviderImpl {
+final class NetworkServiceProviderImpl: NetworkServiceProvider {
     private let token = "Bearer vf9y8r25pkqkemrk21dyjktqo7rs751apk4yjyrl"
 
     private let session: URLSession
@@ -51,12 +51,11 @@ final class NetworkServiceProviderImpl {
             }
         }
         
-        return try await performReques(resultRequest)
+        return try await performRequest(resultRequest)
     }
     
-    
     // MARK: - Private
-    private func performReques<T:Decodable>(_ request: URLRequest) async throws -> T {
+    private func performRequest<T:Decodable>(_ request: URLRequest) async throws -> T {
         do {
             let (data, response) = try await session.data(for: request)
 

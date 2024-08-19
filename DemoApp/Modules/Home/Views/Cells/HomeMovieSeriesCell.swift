@@ -27,7 +27,7 @@ class HomeMovieSeriesCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 12.0, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
         label.textColor = .titleText
         return label
     }()
@@ -64,6 +64,7 @@ class HomeMovieSeriesCell: UICollectionViewCell {
         titleLabel.text = nil
         imageView.image = nil
         lockedImageView.isHidden = true
+        imageView.backgroundColor = .clear
     }
     
     // MARK: - Setup
@@ -80,6 +81,17 @@ class HomeMovieSeriesCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
+            
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 156/104),
+
+            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -8.0),
+            
             lockedImageView.leadingAnchor.constraint(equalTo: imageView.leadingAnchor, constant: 8.0),
             lockedImageView.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 8.0),
             lockedImageView.widthAnchor.constraint(equalToConstant: 24.0),
@@ -89,26 +101,16 @@ class HomeMovieSeriesCell: UICollectionViewCell {
             progressView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
             progressView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             progressView.heightAnchor.constraint(equalToConstant: 4.0),
-            
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 104/156),
-
-            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -8.0),
-            
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
         ])
     }
     
     // MARK: - Public configuration
     func configure(with model: ContentGroup.Asset) {
         guard let url = URL(string: model.image) else {
+            imageView.backgroundColor = .lightGray
             return
         }
-        imageView.sd_setImage(with: url)
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
         titleLabel.text = model.name
         
         lockedImageView.isHidden = model.purchased

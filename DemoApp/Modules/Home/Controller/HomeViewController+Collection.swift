@@ -27,7 +27,7 @@ extension HomeViewController {
                 case .categories:
                     return "Категорії" + ":"
                 case .movieSeriesGroup:
-                    return "Новинки Київстав TV"
+                    return "Новинки Київстар TV"
                 case .liveChannesGroup:
                     return "Дитячі телеканали"
                 case .epgGroup:

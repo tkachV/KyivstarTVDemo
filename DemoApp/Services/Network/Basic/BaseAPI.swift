@@ -9,8 +9,14 @@ import Foundation
 
 class BaseAPI {
 
-    static func perform<T: Decodable>(request: GenericRequest) async throws -> T {
-        return try await NetworkServiceProviderImpl.shared.perform(request)
+    let provider: NetworkServiceProvider
+    
+    init(provider: NetworkServiceProvider = NetworkServiceProviderImpl.shared) {
+        self.provider = provider
+    }
+    
+    func perform<T: Decodable>(request: GenericRequest) async throws -> T {
+        return try await provider.perform(request)
     }
 
     //static func performMultipartFormData

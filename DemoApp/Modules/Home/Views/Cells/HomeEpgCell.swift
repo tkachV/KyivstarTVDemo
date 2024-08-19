@@ -26,7 +26,7 @@ class HomeEpgCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
         label.textColor = .titleText
         return label
     }()
@@ -40,10 +40,11 @@ class HomeEpgCell: UICollectionViewCell {
     }()
     
     let lockedImageView: UIImageView = {
-        let lockView = UIImageView(image: UIImage(resource: ImageResource.homeVideoLocked))
-        lockView.translatesAutoresizingMaskIntoConstraints = false
-        lockView.contentMode = .scaleAspectFit
-        return lockView
+        let imageView = UIImageView(image: UIImage(resource: ImageResource.homeVideoLocked))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+        return imageView
     }()
     
     let progressView: UIProgressView = {
@@ -89,6 +90,13 @@ class HomeEpgCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+
+            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -8.0),
+            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 120/168),
+            
             lockedImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8.0),
             lockedImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8.0),
             lockedImageView.widthAnchor.constraint(equalToConstant: 24.0),
@@ -98,13 +106,7 @@ class HomeEpgCell: UICollectionViewCell {
             progressView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
             progressView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
             progressView.heightAnchor.constraint(equalToConstant: 4.0),
-            
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
-            imageView.bottomAnchor.constraint(equalTo: titleLabel.topAnchor, constant: -8.0),
-            
+                        
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
@@ -112,18 +114,22 @@ class HomeEpgCell: UICollectionViewCell {
             
             subtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             subtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            subtitleLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
+            subtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
     
     // MARK: - Public configuration
     func configure(with model: ContentGroup.Asset) {
         guard let url = URL(string: model.image) else {
+            imageView.backgroundColor = .lightGray
             return
         }
-        imageView.sd_setImage(with: url)
+
+        imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "photo"))
+        
         titleLabel.text = model.name
-        subtitleLabel.text = "У записі • Телеканал \(model.company)"
+        subtitleLabel.attributedText = NSMutableAttributedString(string: "У записі • Телеканал \(model.company)",
+                                                              attributes: [NSAttributedString.Key.kern: 0.07])
         lockedImageView.isHidden = model.purchased
         progressView.isHidden = model.progress == 0
         progressView.setProgress(Float(model.progress)/100.0, animated: false)

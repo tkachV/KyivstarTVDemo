@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Combine
+import SkeletonView
 
 typealias SectionModel = HomeViewController.Collection.SectionModel
 
@@ -45,8 +46,8 @@ final class HomeSectionHeaderView: UICollectionReusableView {
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupViews()
         setupConstraints()
-        actionButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -60,6 +61,11 @@ final class HomeSectionHeaderView: UICollectionReusableView {
     }
     
     // MARK: - Setup
+    private func setupViews() {
+        isSkeletonable = true
+        actionButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
+    }
+    
     private func setupConstraints() {
         addSubview(titleLabel)
         addSubview(actionButton)
@@ -82,9 +88,10 @@ final class HomeSectionHeaderView: UICollectionReusableView {
     // MARK: - Configuration
     func configure(_ section: SectionModel,
                    canBeDeleted: Bool) {
-        titleLabel.text = section.section.title
+  
+        titleLabel.attributedText = NSMutableAttributedString(string: section.section.title ?? "",
+                                                              attributes: [NSAttributedString.Key.kern: -0.24])
         actionButton.isHidden = !canBeDeleted
-        
         sectionModel = section
     }
 }

@@ -17,10 +17,7 @@ final class HomeCoordinator: Coordinator {
     private var cancellable = Set<AnyCancellable>()
 
     // MARK: - Protocol
-    var rootViewController: UIViewController?
-    var navigation: UINavigationController? {
-        (self.rootViewController as? UINavigationController)
-    }
+    var rootViewController: UINavigationController?
     
     func start() {
         let controller = HomeViewController(viewModel)
@@ -44,9 +41,8 @@ final class HomeCoordinator: Coordinator {
         let view = AssetDetailsView(asset: model)
         let controller = AssetDetailsViewController(detailView: view)
 //        let controller = UIHostingController(rootView: view)
-
           
-        navigation?.pushViewController(controller, animated: true)
+        rootViewController?.pushViewController(controller, animated: true)
     }
     
     private func showErrorAlert(error: Error) {
@@ -58,6 +54,6 @@ final class HomeCoordinator: Coordinator {
             alert?.dismiss(animated: true)
         }))
         
-        navigation?.viewControllers.first?.present(alert, animated: true)
+        rootViewController?.viewControllers.last?.present(alert, animated: true)
     }
 }
