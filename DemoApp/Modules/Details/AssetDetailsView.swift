@@ -87,7 +87,9 @@ extension AssetDetailsContentView {
                 Rectangle().foregroundColor(.gray)
             }
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
+            .frame(height: 211)
+            .clipped()
             Button {
                 hostingOutputSubject.send(.dismiss)
             } label: {
