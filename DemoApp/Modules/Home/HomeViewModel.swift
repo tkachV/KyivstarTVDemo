@@ -19,7 +19,6 @@ final class HomeViewModel: ObservableObject {
     private(set) var sectionModels: [SectionModel] = []
 
     @Published private(set) var viewStatus: CollectionStatus = .idl
-    
     public let viewActionsSubject = PassthroughSubject<HomeViewAction, Never>()
     public let viewEventsSubject = PassthroughSubject<HomeViewEvent, Never>()
     private var cancellable = Set<AnyCancellable>()

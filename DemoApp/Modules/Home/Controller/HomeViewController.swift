@@ -60,10 +60,8 @@ final class HomeViewController: UIViewController {
         configureCollectionDataSource()
         bindViewModel()
         refreshControl.addTarget(self, action: #selector(refreshContentAction), for: .valueChanged)
-
         viewModel.viewEventsSubject.send(.viewDidLoad)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
